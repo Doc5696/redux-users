@@ -3,10 +3,12 @@ import styled from 'styled-components';
 const UserActionButton = styled.button`
   border: 1px solid transparent;
   padding: 5px 20px;
+  min-width: 80px;
   margin: 0 5px;
   color: #fff;
   background-color: ${props => (props.removeButton ? 'red' : 'rgb(0, 141, 210)')};
   transition: 0.15s;
+  outline: none;
   &:hover{
     cursor: pointer;
     background-color: #fff;

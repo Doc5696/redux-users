@@ -7,7 +7,9 @@ const ListOfUsers = styled.ul`
  li{
    display: flex;
    justify-content: space-between;
+   align-items: center;
    padding: 5px 1vmin;
+   min-height: 30px;
    &:nth-child(odd){
     background-color: rgba(0, 141, 210, 0.05);
   }

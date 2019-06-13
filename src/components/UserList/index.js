@@ -7,7 +7,16 @@ function UserList(props) {
   return (
     <ListOfUsers>
       {users.map(user =>
-        <User name={user.name} key={user._id} />)}
+        <User
+          name={user.name}
+          userId={user._id}
+          key={user._id}
+          isActive={props.isActive}
+          user={props.user}
+          handleNewNameChange={props.handleNewNameChange}
+          handleReamoveUser={props.handleReamoveUser}
+          handleChangeUser={props.handleChangeUser}
+        />)}
     </ListOfUsers>
   )
 }
