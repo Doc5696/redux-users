@@ -1,6 +1,7 @@
 import React from 'react';
 import AddForm from '../../components/AddForm';
 import UserList from '../../components/UserList';
+import MainContainer from './styles/MainContainer'
 
 
 class Dashboard extends React.Component{
@@ -45,7 +46,7 @@ class Dashboard extends React.Component{
 
   render () {
     return (
-      <div>
+      <MainContainer>
         <AddForm
           handleNameChange={this.handleNameChange}
           user={this.state.user}
@@ -54,7 +55,7 @@ class Dashboard extends React.Component{
         <UserList
           users={this.props.users}
         />
-      </div>
+      </MainContainer>
     )
   }
 }
