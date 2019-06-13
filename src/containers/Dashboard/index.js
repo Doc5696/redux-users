@@ -9,11 +9,12 @@ class Dashboard extends React.Component{
     super(props);
     this.state = {
       user: {
-        name: ""
+        name: "",
+        _id: ""
       }
     }
-    this.handleNameChange = this.handleNameChange.bind(this)
-    this.handleAddUser = this.handleAddUser.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleAddUser = this.handleAddUser.bind(this);
   };
 
   componentDidMount(){

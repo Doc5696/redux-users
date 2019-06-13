@@ -14,9 +14,9 @@ function AddForm(props) {
       />
       <button
         type="submit"
-        onClick={(e) => handleAddUser(e)}
+        onClick={e => handleAddUser(e)}
       >
-          Submit
+        Submit
       </button>
     </form>
   )

@@ -6,7 +6,7 @@ function UserList(props) {
   return (
     <ul>
       {users.map(user =>
-        <User name={user.name} key={user.id} />)}
+        <User name={user.name} key={user._id} />)}
     </ul>
   )
 }
