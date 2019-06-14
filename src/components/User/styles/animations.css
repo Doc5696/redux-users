@@ -39,5 +39,5 @@
 }
 
 .unMounting {
-  animation: outUserAnimation 0.2s ease-out;
+  animation: outUserAnimation 2s ease-out;
 }

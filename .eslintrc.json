@@ -10,10 +10,7 @@
   },
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true,
-      "arrowFunctions": true,
-      "impliedStrict": true,
-      "spread": true
+      "jsx": true
     },
     "ecmaVersion": 2018,
     "sourceType": "module"

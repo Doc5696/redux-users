@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
+    "formik": "^1.5.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.3.1"
+    "styled-components": "^4.3.1",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,7 +35,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
