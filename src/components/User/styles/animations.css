@@ -1,0 +1,43 @@
+@keyframes inUserAnimation {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes outUserAnimation {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.mounting {
+  animation: inUserAnimation 0.2s ease-in;
+}
+
+.unMounting {
+  animation: outUserAnimation 0.2s ease-out;
+}

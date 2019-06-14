@@ -1,5 +1,5 @@
-import React from 'react';
-import CreateUserForm from './styles/CreateUserForm'
+import React from "react";
+import CreateUserForm from "./styles/CreateUserForm";
 
 function AddForm(props) {
   const handleNameChange = props.handleNameChange;
@@ -13,14 +13,11 @@ function AddForm(props) {
         value={props.user.name}
         onChange={e => handleNameChange(e)}
       />
-      <button
-        type="submit"
-        onClick={e => handleAddUser(e)}
-      >
+      <button type="submit" onClick={e => handleAddUser(e)}>
         Submit
       </button>
     </CreateUserForm>
-  )
+  );
 }
 
 export default AddForm;

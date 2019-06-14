@@ -1,11 +1,10 @@
-import React from 'react';
-import AddForm from '../../components/AddForm';
-import UserList from '../../components/UserList';
-import MainContainer from './styles/MainContainer'
+import React from "react";
+import AddForm from "../../components/AddForm";
+import UserList from "../../components/UserList";
+import MainContainer from "./styles/MainContainer";
 
-class Dashboard extends React.Component{
-
-  constructor(props){
+class Dashboard extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       user: {
@@ -13,23 +12,23 @@ class Dashboard extends React.Component{
         _id: "",
         newName: ""
       }
-    }
+    };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleAddUser = this.handleAddUser.bind(this);
     this.handleNewNameChange = this.handleNewNameChange.bind(this);
     this.handleChangeUser = this.handleChangeUser.bind(this);
-    this.handleReamoveUser = this.handleReamoveUser.bind(this);
-  };
+    this.handleRemoveUser = this.handleRemoveUser.bind(this);
+  }
 
   // GETTING LIST OF USERS
 
-  componentDidMount(){
-    this.props.getUsers()
+  componentDidMount() {
+    this.props.getUsers();
   }
 
   // CREATING NEW USER
 
-  handleNameChange(e){
+  handleNameChange(e) {
     this.setState({
       ...this.state,
       user: {
@@ -39,9 +38,9 @@ class Dashboard extends React.Component{
     });
   }
 
-  handleAddUser(e){
+  handleAddUser(e) {
     e.preventDefault();
-    this.props.addUser({"name": this.state.user.name});
+    this.props.addUser({ name: this.state.user.name });
     this.setState({
       ...this.state,
       user: {
@@ -53,7 +52,7 @@ class Dashboard extends React.Component{
 
   // CHANGING USER FROM LIST
 
-  handleNewNameChange(e){
+  handleNewNameChange(e) {
     this.setState({
       ...this.state,
       user: {
@@ -63,24 +62,24 @@ class Dashboard extends React.Component{
     });
   }
 
-  handleChangeUser(user){
+  handleChangeUser = user => {
     this.props.editUser(user);
     this.setState({
       ...this.state,
       user: {
         ...this.state.user,
-        newName: ""
+        name: this.state.newName
       }
     });
-  }
+  };
 
   // REMOVING USER FROM LIST
 
-  handleReamoveUser(user){
-    this.props.removeUser({"name": this.state.user.newName});
+  handleRemoveUser(user) {
+    this.props.removeUser(user);
   }
 
-  render () {
+  render() {
     return (
       <MainContainer>
         <AddForm
@@ -93,10 +92,10 @@ class Dashboard extends React.Component{
           user={this.state.user}
           handleNewNameChange={this.handleNewNameChange}
           handleChangeUser={this.handleChangeUser}
-          handleReamoveUser={this.handleReamoveUser}
+          handleRemoveUser={this.handleRemoveUser}
         />
       </MainContainer>
-    )
+    );
   }
 }
 
