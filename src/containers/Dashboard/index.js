@@ -1,7 +1,7 @@
 import React from 'react';
 import AddForm from '../../components/AddForm';
 import UserList from '../../components/UserList';
-
+import MainContainer from './styles/MainContainer'
 
 class Dashboard extends React.Component{
 
@@ -10,16 +10,24 @@ class Dashboard extends React.Component{
     this.state = {
       user: {
         name: "",
-        _id: ""
+        _id: "",
+        newName: ""
       }
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleAddUser = this.handleAddUser.bind(this);
+    this.handleNewNameChange = this.handleNewNameChange.bind(this);
+    this.handleChangeUser = this.handleChangeUser.bind(this);
+    this.handleReamoveUser = this.handleReamoveUser.bind(this);
   };
+
+  // GETTING LIST OF USERS
 
   componentDidMount(){
     this.props.getUsers()
   }
+
+  // CREATING NEW USER
 
   handleNameChange(e){
     this.setState({
@@ -43,9 +51,38 @@ class Dashboard extends React.Component{
     });
   }
 
+  // CHANGING USER FROM LIST
+
+  handleNewNameChange(e){
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        newName: e.target.value
+      }
+    });
+  }
+
+  handleChangeUser(user){
+    this.props.editUser(user);
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        newName: ""
+      }
+    });
+  }
+
+  // REMOVING USER FROM LIST
+
+  handleReamoveUser(user){
+    this.props.removeUser({"name": this.state.user.newName});
+  }
+
   render () {
     return (
-      <div>
+      <MainContainer>
         <AddForm
           handleNameChange={this.handleNameChange}
           user={this.state.user}
@@ -53,8 +90,12 @@ class Dashboard extends React.Component{
         />
         <UserList
           users={this.props.users}
+          user={this.state.user}
+          handleNewNameChange={this.handleNewNameChange}
+          handleChangeUser={this.handleChangeUser}
+          handleReamoveUser={this.handleReamoveUser}
         />
-      </div>
+      </MainContainer>
     )
   }
 }

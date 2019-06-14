@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { CreateUser } from "../actions/user.actions";
-import { GetUsersRequest } from "../actions/user.actions";
+import { CreateUser, DeleteUser, GetUsersRequest, ChangeUser } from "../actions/user.actions";
 
 export const getUsers = users => dispatch => {
   return axios.get(`/users`, users)
@@ -14,4 +13,23 @@ export const addUser = user => async dispatch => {
   .then(function(response) {
     dispatch(CreateUser(response.data));
   })
+};
+
+export const editUser = user => async dispatch => {
+  return axios.put(`/user`, {
+    id: user.userId,
+    name: user.user.newName
+  })
+  .then(function(response) {
+    console.log(response.data);
+    dispatch(ChangeUser(response.data));
+  }) 
+};
+
+export const removeUser = user => async dispatch => {
+  return axios.delete(`/user/${user.userId}`, user)
+  .then(function(response) {
+    console.log(response.data);
+    dispatch(DeleteUser(response.data));
+  }) 
 };

@@ -1,10 +1,11 @@
 import React from 'react';
+import CreateUserForm from './styles/CreateUserForm'
 
 function AddForm(props) {
   const handleNameChange = props.handleNameChange;
   const handleAddUser = props.handleAddUser;
   return (
-    <form>
+    <CreateUserForm>
       <input
         type="text"
         name="userName"
@@ -18,7 +19,7 @@ function AddForm(props) {
       >
         Submit
       </button>
-    </form>
+    </CreateUserForm>
   )
 }
 
