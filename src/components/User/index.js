@@ -1,55 +1,62 @@
-import React, { useState } from 'react';
-import UserButtons from './styles/UserButtons';
-import UserActionButton from './styles/UserActionButton';
-import EditForm from '../EditForm';
+import React, { useState, useEffect } from "react";
+import UserButtons from "./styles/UserButtons";
+import UserActionButton from "./styles/UserActionButton";
+import "./styles/animations.css";
+import EditForm from "../EditForm";
 
 function User(props) {
-  const handleReamoveUser = props.handleReamoveUser;
+  const handleRemoveUser = props.handleRemoveUser;
   const handleChangeUser = props.handleChangeUser;
   const [isActive, toggleActive] = useState(false);
+  let isVisible = true;
+
+  useEffect(() => {
+    return () => {
+      isVisible = !isVisible;
+    };
+  }, []);
 
   return (
-    <li>
-        {isActive ? (
-          <EditForm 
-            user={props.user}
-            handleNewNameChange={props.handleNewNameChange}
-          />
-        ) : (
-          <span>
-            {props.name}
-          </span>
-        )}
-        
+    <li className={isVisible ? "mounting" : "unMounting"}>
+      {isActive ? (
+        <EditForm
+          currentName={props.name}
+          user={props.user}
+          handleNewNameChange={props.handleNewNameChange}
+        />
+      ) : (
+        <span>{props.name}</span>
+      )}
       <UserButtons>
         {isActive ? (
           <UserActionButton
             removeButton={false}
             onClick={() => {
               toggleActive(!isActive);
-              handleChangeUser(props)
-            }}
-          >
+              handleChangeUser(props);
+            }}>
             Save
           </UserActionButton>
         ) : (
           <UserActionButton
             type="submit"
             removeButton={false}
-            onClick={(e) => toggleActive(!isActive)}
-          >
+            onClick={() => {
+              toggleActive(!isActive);
+            }}>
             Edit
           </UserActionButton>
         )}
         <UserActionButton
           removeButton={true}
-          onClick={() => handleReamoveUser(props)}
-        >
+          onClick={() => {
+            handleRemoveUser(props);
+          }}>
           Delete
         </UserActionButton>
       </UserButtons>
     </li>
-  )
+  );
 }
 
 export default User;
