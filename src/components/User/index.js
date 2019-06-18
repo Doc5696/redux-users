@@ -1,62 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import UserButtons from "./styles/UserButtons";
 import UserActionButton from "./styles/UserActionButton";
 import "./styles/animations.css";
 import EditForm from "../EditForm";
+import { delay } from "q";
 
-function User(props) {
-  const handleRemoveUser = props.handleRemoveUser;
-  const handleChangeUser = props.handleChangeUser;
-  const [isActive, toggleActive] = useState(false);
-  let isVisible = true;
-
-  useEffect(() => {
-    return () => {
-      isVisible = !isVisible;
+class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActive: false,
+      isVisible: Boolean
     };
-  }, []);
+  }
 
-  return (
-    <li className={isVisible ? "mounting" : "unMounting"}>
-      {isActive ? (
-        <EditForm
-          currentName={props.name}
-          user={props.user}
-          handleNewNameChange={props.handleNewNameChange}
-        />
-      ) : (
-        <span>{props.name}</span>
-      )}
-      <UserButtons>
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      isVisible: true
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      ...this.state,
+      isVisible: false
+    });
+  }
+
+  toggleActive = () => {
+    this.setState({
+      ...this.state,
+      isActive: !this.state.isActive
+    });
+  };
+
+  render() {
+    const { isActive, isVisible } = this.state;
+    const toggleActive = this.toggleActive;
+    const handleChangeUser = this.props.handleChangeUser;
+    const handleRemoveUser = this.props.handleRemoveUser;
+    return (
+      <li className={isVisible ? "mounting" : "unMounting"}>
         {isActive ? (
-          <UserActionButton
-            removeButton={false}
-            onClick={() => {
-              toggleActive(!isActive);
-              handleChangeUser(props);
-            }}>
-            Save
-          </UserActionButton>
+          <EditForm
+            currentName={this.props.name}
+            user={this.props.user}
+            handleNewNameChange={this.props.handleNewNameChange}
+          />
         ) : (
-          <UserActionButton
-            type="submit"
-            removeButton={false}
-            onClick={() => {
-              toggleActive(!isActive);
-            }}>
-            Edit
-          </UserActionButton>
+          <span>{this.props.name}</span>
         )}
-        <UserActionButton
-          removeButton={true}
-          onClick={() => {
-            handleRemoveUser(props);
-          }}>
-          Delete
-        </UserActionButton>
-      </UserButtons>
-    </li>
-  );
+        <UserButtons>
+          {isActive ? (
+            <UserActionButton
+              removeButton={false}
+              onClick={() => {
+                toggleActive(!isActive);
+                handleChangeUser(this.props);
+              }}>
+              Save
+            </UserActionButton>
+          ) : (
+            <UserActionButton
+              type="submit"
+              removeButton={false}
+              onClick={() => {
+                toggleActive(!isActive);
+              }}>
+              Edit
+            </UserActionButton>
+          )}
+          <UserActionButton
+            removeButton={true}
+            onClick={() => {
+              handleRemoveUser(this.props);
+            }}>
+            Delete
+          </UserActionButton>
+        </UserButtons>
+      </li>
+    );
+  }
 }
 
 export default User;
