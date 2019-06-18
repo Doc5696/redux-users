@@ -1,22 +1,50 @@
 import React from "react";
 import EditUserForm from "./styles/EditUserForm";
+import { Formik, Form, Field, withFormik } from "formik";
+import validateUserName from "../../services/consts/validateUserName";
 
-function EditForm(props) {
-  const handleNewNameChange = props.handleNewNameChange;
-  let newName = props.newName;
+const EditForm = ({ ...props }) => {
+  const handleChangeUser = props.handleChangeUser;
   let currentName = props.currentName;
+  let userId = props.userId;
+  let toggleActive = props.toggleActive;
   return (
     <EditUserForm>
-      <input
-        type="text"
-        name="newUserName"
-        id="newName"
-        defaultValue={currentName}
-        value={newName}
-        onChange={e => handleNewNameChange(e)}
-      />
+      <Formik
+        initialValues={{
+          newUserName: currentName,
+          idOfUser: userId
+        }}
+        onSubmit={handleChangeUser}>
+        {({ errors, touched, isValid, handleReset }) => (
+          <Form>
+            <Field
+              name="newUserName"
+              className={`${isValid}`}
+              validate={validateUserName}
+            />
+            <span>
+              <button type="submit" disabled={!isValid}>
+                Save
+              </button>
+              <button
+                type="reset"
+                onClick={e => {
+                  handleReset(e);
+                  toggleActive();
+                }}>
+                Cancel
+              </button>
+            </span>
+
+            {errors.newUserName && touched.newUserName && (
+              <div className="error">{errors.newUserName}</div>
+            )}
+          </Form>
+        )}
+      </Formik>
     </EditUserForm>
   );
-}
+};
 
-export default EditForm;
+export default withFormik({})(EditForm);
