@@ -3,7 +3,6 @@ import UserButtons from "./styles/UserButtons";
 import UserActionButton from "./styles/UserActionButton";
 import "./styles/animations.css";
 import EditForm from "../EditForm";
-import { delay } from "q";
 
 class User extends React.Component {
   constructor(props) {
@@ -45,22 +44,21 @@ class User extends React.Component {
         {isActive ? (
           <EditForm
             currentName={this.props.name}
+            userId={this.props.userId}
             user={this.props.user}
+            toggleActive={this.toggleActive}
             handleNewNameChange={this.props.handleNewNameChange}
+            handleChangeUser={v => {
+              handleChangeUser(v);
+              toggleActive(!isActive);
+            }}
           />
         ) : (
           <span>{this.props.name}</span>
         )}
         <UserButtons>
           {isActive ? (
-            <UserActionButton
-              removeButton={false}
-              onClick={() => {
-                toggleActive(!isActive);
-                handleChangeUser(this.props);
-              }}>
-              Save
-            </UserActionButton>
+            false
           ) : (
             <UserActionButton
               type="submit"

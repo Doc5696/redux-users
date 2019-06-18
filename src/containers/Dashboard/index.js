@@ -13,9 +13,7 @@ class Dashboard extends React.Component {
         newName: ""
       }
     };
-    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleAddUser = this.handleAddUser.bind(this);
-    this.handleNewNameChange = this.handleNewNameChange.bind(this);
     this.handleChangeUser = this.handleChangeUser.bind(this);
     this.handleRemoveUser = this.handleRemoveUser.bind(this);
   }
@@ -28,50 +26,15 @@ class Dashboard extends React.Component {
 
   // CREATING NEW USER
 
-  handleNameChange(e) {
-    this.setState({
-      ...this.state,
-      user: {
-        ...this.state.user,
-        name: e.target.value
-      }
-    });
-  }
-
-  handleAddUser(e) {
-    e.preventDefault();
-    this.props.addUser({ name: this.state.user.name });
-    this.setState({
-      ...this.state,
-      user: {
-        ...this.state.user,
-        name: ""
-      }
-    });
+  handleAddUser(v) {
+    this.props.addUser(v);
   }
 
   // CHANGING USER FROM LIST
 
-  handleNewNameChange(e) {
-    this.setState({
-      ...this.state,
-      user: {
-        ...this.state.user,
-        newName: e.target.value
-      }
-    });
+  handleChangeUser(v) {
+    this.props.editUser(v);
   }
-
-  handleChangeUser = user => {
-    this.props.editUser(user);
-    this.setState({
-      ...this.state,
-      user: {
-        ...this.state.user,
-        name: this.state.newName
-      }
-    });
-  };
 
   // REMOVING USER FROM LIST
 
@@ -83,9 +46,9 @@ class Dashboard extends React.Component {
     return (
       <MainContainer>
         <AddForm
-          handleNameChange={this.handleNameChange}
+          handleNameChange={e => this.handleNameChange(e)}
           user={this.state.user}
-          handleAddUser={this.handleAddUser}
+          handleAddUser={v => this.handleAddUser(v)}
         />
         <UserList
           users={this.props.users}
